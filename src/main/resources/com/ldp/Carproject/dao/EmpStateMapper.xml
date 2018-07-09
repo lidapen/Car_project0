@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ldp.Carproject.dao.EmpStateMapper">
+  <resultMap id="BaseResultMap" type="com.ldp.Carproject.pojo.EmpState">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="Emp_State" jdbcType="VARCHAR" property="empState" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, Emp_State
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from emp_state
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from emp_state
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ldp.Carproject.pojo.EmpState">
+    insert into emp_state (id, Emp_State)
+    values (#{id,jdbcType=INTEGER}, #{empState,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ldp.Carproject.pojo.EmpState">
+    insert into emp_state
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="empState != null">
+        Emp_State,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="empState != null">
+        #{empState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ldp.Carproject.pojo.EmpState">
+    update emp_state
+    <set>
+      <if test="empState != null">
+        Emp_State = #{empState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ldp.Carproject.pojo.EmpState">
+    update emp_state
+    set Emp_State = #{empState,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ldp.Carproject.dao.MemberMapper">
+  <resultMap id="BaseResultMap" type="com.ldp.Carproject.pojo.Member">
+    <id column="MEM_ID" jdbcType="INTEGER" property="memId" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="gender" jdbcType="CHAR" property="gender" />
+    <result column="Phone" jdbcType="VARCHAR" property="phone" />
+    <result column="Emp_Id" jdbcType="INTEGER" property="empId" />
+    <result column="Car_Id" jdbcType="VARCHAR" property="carId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    MEM_ID, NAME, gender, Phone, Emp_Id, Car_Id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from member
+    where MEM_ID = #{memId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from member
+    where MEM_ID = #{memId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ldp.Carproject.pojo.Member">
+    insert into member (MEM_ID, NAME, gender, 
+      Phone, Emp_Id, Car_Id
+      )
+    values (#{memId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{gender,jdbcType=CHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{empId,jdbcType=INTEGER}, #{carId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ldp.Carproject.pojo.Member">
+    insert into member
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="memId != null">
+        MEM_ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="phone != null">
+        Phone,
+      </if>
+      <if test="empId != null">
+        Emp_Id,
+      </if>
+      <if test="carId != null">
+        Car_Id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="memId != null">
+        #{memId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=CHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="empId != null">
+        #{empId,jdbcType=INTEGER},
+      </if>
+      <if test="carId != null">
+        #{carId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ldp.Carproject.pojo.Member">
+    update member
+    <set>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=CHAR},
+      </if>
+      <if test="phone != null">
+        Phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="empId != null">
+        Emp_Id = #{empId,jdbcType=INTEGER},
+      </if>
+      <if test="carId != null">
+        Car_Id = #{carId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where MEM_ID = #{memId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ldp.Carproject.pojo.Member">
+    update member
+    set NAME = #{name,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=CHAR},
+      Phone = #{phone,jdbcType=VARCHAR},
+      Emp_Id = #{empId,jdbcType=INTEGER},
+      Car_Id = #{carId,jdbcType=VARCHAR}
+    where MEM_ID = #{memId,jdbcType=INTEGER}
+  </update>
+</mapper>
