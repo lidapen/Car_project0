@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ldp.Carproject.dao.ShngpztMapper">
-  <resultMap id="BaseResultMap" type="com.ldp.Carproject.pojo.Shngpzt">
+  <resultMap id="BaseResultMap" type="com.ldp.Carproject.pojo.Shangpzt">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="Shangp_State" jdbcType="VARCHAR" property="shangpState" />
   </resultMap>
@@ -18,11 +18,11 @@
     delete from shngpzt
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.ldp.Carproject.pojo.Shngpzt">
+  <insert id="insert" parameterType="com.ldp.Carproject.pojo.Shangpzt">
     insert into shngpzt (id, Shangp_State)
     values (#{id,jdbcType=INTEGER}, #{shangpState,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ldp.Carproject.pojo.Shngpzt">
+  <insert id="insertSelective" parameterType="com.ldp.Carproject.pojo.Shangpzt">
     insert into shngpzt
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -41,7 +41,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ldp.Carproject.pojo.Shngpzt">
+  <update id="updateByPrimaryKeySelective" parameterType="com.ldp.Carproject.pojo.Shangpzt">
     update shngpzt
     <set>
       <if test="shangpState != null">
@@ -50,7 +50,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ldp.Carproject.pojo.Shngpzt">
+  <update id="updateByPrimaryKey" parameterType="com.ldp.Carproject.pojo.Shangpzt">
     update shngpzt
     set Shangp_State = #{shangpState,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}

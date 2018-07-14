@@ -10,9 +10,17 @@
     <result column="Input_Time" jdbcType="TIMESTAMP" property="inputTime" />
     <result column="Shangp_Id" jdbcType="INTEGER" property="shangpId" />
     <result column="Classify_Id" jdbcType="INTEGER" property="classifyId" />
+    <association property="shangplb" javaType="com.ldp.Carproject.pojo.Shangplb">
+      <id column="s_id" property="id"/>
+      <result column="s_classify" property="shangpClassify"/>
+    </association>
+    <association property="shangpzt" javaType="com.ldp.Carproject.pojo.Shangpzt">
+      <id column="st_id" property="id"/>
+      <result column="st_ShangpState" property="shangpState"/>
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
-    id, Name, ShangP_Type, Price, State, Input_Time, Shangp_Id, Classify_Id
+    id, `Name`, ShangP_Type, Price, State, Input_Time, Shangp_Id, Classify_Id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -20,6 +28,65 @@
     from commodity
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <!--分页查询-->
+    <select id="findCommodityByCondition" resultMap="BaseResultMap">
+      select
+      s.id as s_id,s.shangp_Classify as s_classify,com.id,`Name`,com.ShangP_Type,Price,State,Input_Time,com.Shangp_Id,com.Classify_Id
+      from commodity com
+      left join shangplb s
+      on com.Shangp_Id=s.id
+      left join shangpzt st
+      on com.Classify_Id=st.id
+      <where>
+        <if test="condition!=0 and condition!=null">
+          com.Shangp_Id=#{condition}
+          com.Classify_Id=#{condition}
+        </if>
+      </where>
+      ORDER BY Price ASC
+      Limit #{offset},#{pageSize}
+    </select>
+  <!--根据条件查询数量-->
+  <select id="getCountByCondition" resultType="java.lang.Integer">
+    select count(1)
+    from commodity com
+    left join shangplb s
+    on com.Shangp_Id=s.id
+    left join shangpzt st
+    on com.Classify_Id=st.id
+    <where>
+      <if test="condition!='' and condition!=null">
+        s.ShangP_Type LIKE CONCAT('%',#{condition},'%')
+        st.State LIKE CONCAT('%',#{condition},'%')
+      </if>
+    </where>
+    ORDER BY Price ASC
+  </select>
+  <!--根据主键查询对应的商品信息-->
+  <select id="findCommodityById"  resultMap="BaseResultMap">
+    select
+    s.id as s_id,s.shangp_Classify as s_classify,com.id,`Name`,com.ShangP_Type,Price,State,Input_Time,com.Shangp_Id,com.Classify_Id
+    from commodity com
+    left join shangplb s
+    on com.Shangp_Id=s.id
+    left join shangpzt st
+    on com.Classify_Id=st.id
+    where com.id=#{id}
+
+  </select>
+  <!--根据主键更新商品信息-->
+  <update id="updateCommodityById">
+    update commodity
+    set Name = #{name,jdbcType=VARCHAR},
+      ShangP_Type = #{shangpType,jdbcType=VARCHAR},
+      Price = #{price,jdbcType=DECIMAL},
+      State = #{state,jdbcType=INTEGER},
+      Input_Time = #{inputTime,jdbcType=TIMESTAMP},
+      Shangp_Id = #{shangpId,jdbcType=INTEGER},
+      Classify_Id = #{classifyId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--删除商品信息-->
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from commodity
     where id = #{id,jdbcType=INTEGER}
@@ -87,7 +154,26 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ldp.Carproject.pojo.Commodity">
+  <!--新增商品信息-->
+    <insert id="insertCommodity">
+   insert into commodity(
+			`Name`,
+			`ShangP_Type`,
+			`Price`,
+			`State`,
+			`Input_Time`,
+			`Shangp_Id`,
+			`Classify_Id`)
+		values(
+			#{name},
+			#{shangpType},
+			#{price},
+			#{state},
+			#{inputTime},
+			#{shangpId},
+			#{classifyId})
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ldp.Carproject.pojo.Commodity">
     update commodity
     <set>
       <if test="name != null">
@@ -125,4 +211,5 @@
       Classify_Id = #{classifyId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
 </mapper>

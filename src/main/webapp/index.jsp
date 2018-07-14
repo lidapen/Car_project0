@@ -88,7 +88,7 @@
 		<!--商品管理-->
 		<li>
 			<i class="menu_icon fa fa-list"></i>
-			<a href="javascript:void(0);" data-id="goods" data-href="goods_List.jsp">商品列表</a>
+			<a href="javascript:void(0);" data-id="goods" data-href="/query">商品列表</a>
 		</li>
 		<li>
 			<i class="menu_icon fa fa-cube"></i>

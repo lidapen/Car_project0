@@ -39,7 +39,7 @@
         <!--注入数据源-->
         <property name="dataSource" ref="dataSource"/>
         <!--注入映射文件,自动将java源代码目录下的mapper文件夹下的所有xml文件都声明成映射文件-->
-        <!--<property name="mapperLocations" value="classpath:com/ldp/Carproject/dao/*.xml"/>-->
+        <property name="mapperLocations" value="classpath:com/ldp/Carproject/dao/*.xml"/>
 
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
         <!--<property name="typeAliasesPackage" value="com.xingjiejian.spring.demo.pm.entity"/>-->
@@ -72,9 +72,9 @@
         </tx:attributes>
     </tx:advice>
     <!--aop配置事务切面-->
-    <!--<aop:config>-->
-        <!--<aop:pointcut id="txPointcut" expression="execution(* com.ldp.service.impl.*.*(..))"/>-->
-        <!--&lt;!&ndash; 事务使用默认前置增强处理 &ndash;&gt;-->
-        <!--<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>-->
-    <!--</aop:config>-->
+    <aop:config>
+        <aop:pointcut id="txPointcut" expression="execution(* com.ldp.Carproject.service.impl.*.*(..))"/>
+        <!-- 事务使用默认前置增强处理 -->
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
+    </aop:config>
 </beans>

@@ -17,40 +17,40 @@
 		<div class="main_box">
 			<h2><span></span>添加商品</h2>
 			<div class="cont_box">
-				<form action="#" method="post" id="addPro_form">
+				<form action="/addCommodity" method="post" id="addPro_form">
 					<ul class="addpro_box">
-						<li class="clearfix" style="overflow:inherit;">
-							<label>搜索选择：</label>
-							<div class="ss_box">
-								<input type="text" placeholder="请选择内容" name="search" class="select_search" readonly required data-msg-required="内容不能为空"/>
-								<dl>
-									<dt>
-										<input type="text" placeholder="请输入搜索关键词" class="ss_cont"/>
-									</dt>
-									<dd>搜索一</dd>
-									<dd>搜索商品</dd>
-									<dd>商品一</dd>
-									<dd>商品二</dd>
-									<dd>其他</dd>
-								</dl>
-							</div>
-						</li>
+						<%--<li class="clearfix" style="overflow:inherit;">--%>
+							<%--<label>搜索选择：</label>--%>
+							<%--<div class="ss_box">--%>
+								<%--<input type="text" placeholder="请选择内容" name="search" class="select_search" readonly required data-msg-required="内容不能为空"/>--%>
+								<%--<dl>--%>
+									<%--<dt>--%>
+										<%--<input type="text" placeholder="请输入搜索关键词" class="ss_cont"/>--%>
+									<%--</dt>--%>
+									<%--<dd>搜索一</dd>--%>
+									<%--<dd>搜索商品</dd>--%>
+									<%--<dd>商品一</dd>--%>
+									<%--<dd>商品二</dd>--%>
+									<%--<dd>其他</dd>--%>
+								<%--</dl>--%>
+							<%--</div>--%>
+						<%--</li>--%>
 						<li>
 							<label>商品名称：</label>
-							<input type="text" placeholder="请输入商品名称" name="proname" required data-rule-proname="true" data-msg-required="商品名称不能为空"/>
+							<input type="text" placeholder="请输入商品名称" name="name" id="name" required data-rule-proname="true" data-msg-required="商品名称不能为空"/>
 						</li>
 						<li>
 							<label>售价：</label>
-							<input type="text" placeholder="请输入商品售价" id="pricein" name="pricein" required data-rule-pricein="true" data-msg-required="商品售价不能为空"/>
+							<input type="text" placeholder="请输入商品售价" id="price" name="price" required data-rule-pricein="true" data-msg-required="商品售价不能为空"/>
 						</li>
-						<li>
-							<label>销售提成：</label>
-							<input type="text" placeholder="请输入销售提成" id="sale" name="pricein" required data-rule-pricein="true" data-msg-required="销售提成不能为空"/>
-						</li>
-						<li>
-							<label>库存：</label>
-							<input type="text" placeholder="请输入商品库存" name="digits" required data-rule-digits="true" data-msg-required="商品库存不能为空，无库存请填“0”" data-msg-digits="请输入正整数"/>
-						</li>
+						<%--<li>--%>
+							<%--<label>销售提成：</label>--%>
+							<%--<input type="text" placeholder="请输入销售提成" id="sale" name="pricein" required data-rule-pricein="true" data-msg-required="销售提成不能为空"/>--%>
+						<%--</li>--%>
+						<%--<li>--%>
+							<%--<label>库存：</label>--%>
+							<%--<input type="text" placeholder="请输入商品库存" name="digits" required data-rule-digits="true" data-msg-required="商品库存不能为空，无库存请填“0”" data-msg-digits="请输入正整数"/>--%>
+						<%--</li>--%>
 						<li>
 							<label>状态：</label>
 							<select name="state">
@@ -59,21 +59,26 @@
 							<select>
 						</li>
 						<li>
+						<label>添加时间：</label>
+						<input type="date" placeholder="当前时间" id="inputTime" name="inputTime"/>
+						</li>
+
+						<li>
 							<label>所属分类：</label>
-							<select name="classfiy" required data-msg-required="所属分类不能为空">
-								<option value="">请选择所属分类</option>
-								<option value="1">商品分类一</option>
-								<option value="2">商品分类二</option>
-								<option value="3">商品分类三</option>
+							<select name="shangpType" id="shangpType" required data-msg-required="所属分类不能为空">
+								<option value="">请选择</option>
+								<option value="1">汽车轮胎</option>
+								<option value="2">汽车蜡</option>
+								<option value="3">后视镜</option>
 							<select>
 						</li>
-						<li>
-							<label>商品描述：</label>
-							<textarea rows="3" name="detail"></textarea>
-						</li>
+						<%--<li>--%>
+							<%--<label>商品描述：</label>--%>
+							<%--<textarea rows="3" name="detail"></textarea>--%>
+						<%--</li>--%>
 					</ul>
 					<div class="probtn_box clearfix">
-						<input type="button" value="添加商品" class="btn blue_btn submit"/>
+						<input type="submit" id="btn" value="添加商品" />
 					</div>
 				</form>
 			</div>
@@ -85,12 +90,12 @@
 		<script src="js/jquery.validate.min.js"></script>
 		<script src="js/jquery.form.min.js"></script>
 		<script src="js/other.js"></script>
-		<script>
-			$(function(){
-				$("body").other({formId:"#addPro_form",formUrl:"#"});//formUrl 表单请求地址
-				//select search
-				$.selectSearch($(".ss_box"));
-			});
-		</script>
+		<%--<script>--%>
+			<%--$(function(){--%>
+				<%--$("body").other({formId:"#addPro_form",formUrl:"/addCommodity"});//formUrl 表单请求地址--%>
+				<%--//select search--%>
+				<%--$.selectSearch($(".ss_box"));--%>
+			<%--});--%>
+		<%--</script>--%>
 	</body>
 </html>

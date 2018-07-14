@@ -1,17 +1,17 @@
 package com.ldp.Carproject.dao;
 
-import com.ldp.Carproject.pojo.Shngpzt;
+import com.ldp.Carproject.pojo.Shangpzt;
 
 public interface ShngpztMapper {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(Shngpzt record);
+    int insert(Shangpzt record);
 
-    int insertSelective(Shngpzt record);
+    int insertSelective(Shangpzt record);
 
-    Shngpzt selectByPrimaryKey(Integer id);
+    Shangpzt selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(Shngpzt record);
+    int updateByPrimaryKeySelective(Shangpzt record);
 
-    int updateByPrimaryKey(Shngpzt record);
+    int updateByPrimaryKey(Shangpzt record);
 }
